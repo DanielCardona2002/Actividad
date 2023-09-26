@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/activity2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ir a Actividad2">
+
+        </Button>
+
+        <Button
+            android:id="@+id/google"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ir a Google">
+
+        </Button>
+
+        <Button
+            android:id="@+id/alarma"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Crear alarma">
+
+        </Button>
+
+        <Button
+            android:id="@+id/llamar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Llamar">
+
+        </Button>
+
+
+
+    </LinearLayout>
+
+</LinearLayout>
