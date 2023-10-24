@@ -8,12 +8,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.AlarmClock;
 import android.provider.CalendarContract;
+import android.provider.ContactsContract;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button activity2, mapa, calendario, google,alarma,llamada;
+    Button activity2,camara,  contacto, musica, google,alarma,llamada;
 
 
 
@@ -23,8 +25,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         activity2 = findViewById(R.id.activity2);
-        mapa = findViewById(R.id.mapa);
-        calendario = findViewById(R.id.calendario);
+        camara = findViewById(R.id.camara);
+        contacto = findViewById(R.id.contacto);
+        musica = findViewById(R.id.musica);
         google = findViewById(R.id.google);
         alarma = findViewById(R.id.alarma);
         llamada = findViewById(R.id.llamar);
@@ -32,16 +35,36 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        mapa.setOnClickListener(new View.OnClickListener(){
+
+        camara.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                showMap(Uri.parse("https://www.google.com/maps/place/Instituci%C3%B3n+Universitaria+Pascual+Bravo/@6.2733494,-75.5883927,17z/data=!3m1!4b1!4m6!3m5!1s0x8e44293b5709163d:0x2744a3a12c601259!8m2!3d6.2733441!4d-75.5858178!16s%2Fg%2F120rs03z?entry=ttu"));
+                capturePhoto();
 
             }
 
-            public void showMap(Uri geoLocation) {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(String.valueOf(geoLocation)));
+            public void capturePhoto() {
+                Intent intent = new Intent(MediaStore.INTENT_ACTION_VIDEO_CAMERA);
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    int REQUEST_IMAGE_CAPTURE = 0;
+                    startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+                }
+            }
+
+        });
+
+        contacto.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                insertContact("Tareas","......");
+
+            }
+
+            public void insertContact(String name, String email) {
+                Intent intent = new Intent(Intent.ACTION_INSERT);
+                intent.setType(ContactsContract.Contacts.CONTENT_TYPE);
+                intent.putExtra(ContactsContract.Intents.Insert.NAME, name);
+                intent.putExtra(ContactsContract.Intents.Insert.EMAIL, email);
                 if (intent.resolveActivity(getPackageManager()) != null) {
                     startActivity(intent);
                 }
@@ -49,27 +72,23 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-        calendario.setOnClickListener(new View.OnClickListener(){
-
+        musica.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                addEvent("", "",5,10);
-
+                playSearchArtist("");
 
             }
 
-            public void addEvent(String title, String location, long begin, long end) {
-                Intent intent = new Intent(Intent.ACTION_INSERT)
-                        .setData(CalendarContract.Events.CONTENT_URI)
-                        .putExtra(CalendarContract.Events.TITLE, title)
-                        .putExtra(CalendarContract.Events.EVENT_LOCATION, location)
-                        .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, begin)
-                        .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, end);
+            public void playSearchArtist(String artist) {
+                Intent intent = new Intent(MediaStore.INTENT_ACTION_MEDIA_PLAY_FROM_SEARCH);
+                intent.putExtra(MediaStore.EXTRA_MEDIA_FOCUS,
+                        MediaStore.Audio.Artists.ENTRY_CONTENT_TYPE);
+                intent.putExtra(MediaStore.EXTRA_MEDIA_ARTIST, artist);
+                intent.putExtra(SearchManager.QUERY, artist);
                 if (intent.resolveActivity(getPackageManager()) != null) {
                     startActivity(intent);
                 }
             }
-
 
         });
 

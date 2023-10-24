@@ -21,18 +21,26 @@
         </Button>
 
         <Button
-            android:id="@+id/mapa"
+            android:id="@+id/camara"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Mapa">
+            android:text="Camara">
 
         </Button>
 
         <Button
-            android:id="@+id/calendario"
+            android:id="@+id/contacto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Calendario">
+            android:text="Contacto">
+
+        </Button>
+
+        <Button
+            android:id="@+id/musica"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Musica">
 
         </Button>
 
